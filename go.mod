@@ -3,7 +3,7 @@ module github.com/natalie-o-perret/go-sql
 go 1.24
 
 require (
-	github.com/natalie-o-perret/go-functionalish v0.0.0-00010101000000-000000000000
+	github.com/natalie-o-perret/go-functionalish v1.6.0
 	modernc.org/sqlite v1.37.0
 )
 
@@ -19,5 +19,3 @@ require (
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.9.1 // indirect
 )
-
-replace github.com/natalie-o-perret/go-functionalish => ../go-functionalish
