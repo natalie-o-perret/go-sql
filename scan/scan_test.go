@@ -77,7 +77,7 @@ func TestMapper_Scan_UnknownColumnDiscarded(t *testing.T) {
 func TestMapper_Scan_PropagatesScanError(t *testing.T) {
 	cols := []string{"id"}
 	want := errors.New("driver error")
-	mockScan := func(dest ...any) error { return want }
+	mockScan := func(_ ...any) error { return want }
 	var row testRow
 	err := testMapper.Scan(cols, mockScan, &row)
 	if err == nil {

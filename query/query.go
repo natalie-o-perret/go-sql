@@ -91,7 +91,7 @@ func Query[T any](
 		return result.Err[seq.Seq[T], error](fmt.Errorf("query: columns: %w", err))
 	}
 	s := seq.Seq[T](func(yield func(T) bool) {
-		defer rows.Close() //nolint:errcheck
+		defer rows.Close() //nolint:errcheck // deferred Close returns an error we cannot act on after the query has completed
 		for rows.Next() {
 			var t T
 			if err := m.Scan(cols, rows.Scan, &t); err != nil {
@@ -121,7 +121,7 @@ func QueryAll[T any](
 	if err != nil {
 		return result.Err[[]T, error](fmt.Errorf("query: %w", err))
 	}
-	defer rows.Close() //nolint:errcheck
+	defer rows.Close() //nolint:errcheck // deferred Close returns an error we cannot act on after the query has completed
 	cols, err := rows.Columns()
 	if err != nil {
 		return result.Err[[]T, error](fmt.Errorf("query: columns: %w", err))
@@ -157,7 +157,7 @@ func QueryOne[T any](
 	if err != nil {
 		return result.Err[option.Option[T], error](fmt.Errorf("query one: %w", err))
 	}
-	defer rows.Close() //nolint:errcheck
+	defer rows.Close() //nolint:errcheck // deferred Close returns an error we cannot act on after the query has completed
 	cols, err := rows.Columns()
 	if err != nil {
 		return result.Err[option.Option[T], error](fmt.Errorf("query one: columns: %w", err))
