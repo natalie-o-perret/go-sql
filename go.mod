@@ -1,9 +1,9 @@
 module github.com/natalie-o-perret/go-sql
 
-go 1.24
+go 1.27
 
 require (
-	github.com/natalie-o-perret/go-functionalish v1.6.0
+	github.com/natalie-o-perret/go-functionalish v1.9.0
 	modernc.org/sqlite v1.37.0
 )
 
