@@ -1,4 +1,4 @@
-// Package gosql is a zero-reflection, generics-native SQL library for Go 1.24+.
+// Package gosql is a zero-reflection, generics-native SQL library for Go 1.27+.
 //
 // No reflection. No struct tags. No code generation. Pure generics, explicit
 // column bindings, and railway-oriented error handling via Result[T,E].

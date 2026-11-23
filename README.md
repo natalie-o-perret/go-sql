@@ -4,8 +4,10 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/natalie-o-perret/go-sql.svg)](https://pkg.go.dev/github.com/natalie-o-perret/go-sql)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributing](https://img.shields.io/badge/contributing-guide-blue)](CONTRIBUTING.md)
-A zero-reflection, generics-native SQL library for Go 1.24+.
+A zero-reflection, generics-native SQL library for Go 1.27+.
 No reflection. No struct tags. No code generation. Explicit column bindings and railway-oriented error handling.
+
+Use the latest patched stable Go release.
 > [!NOTE]
 > Companion library to [go-functionalish](https://github.com/natalie-o-perret/go-functionalish).
 >
@@ -71,10 +73,10 @@ users := res.UnwrapOr(nil)
 res := query.Query(ctx, db, UserMapper, "SELECT id, name, age FROM users ORDER BY id")
 // result.Result[seq.Seq[User], error]
 // Rows are closed when the Seq is fully consumed or the consumer breaks early.
-names := seq.Map(
-    res.Unwrap().Filter(func(u User) bool { return u.Age >= 18 }),
-    func(u User) string { return u.Name },
-).ToSlice()
+names := res.Unwrap().
+    Filter(func(u User) bool { return u.Age >= 18 }).
+    Map(func(u User) string { return u.Name }).
+    ToSlice()
 ```
 
 #### QueryOne -- first row as Option[T]
