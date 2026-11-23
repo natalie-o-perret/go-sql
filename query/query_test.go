@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"testing"
 
-	"github.com/natalie-o-perret/go-functionalish/seq"
 	gosqlquery "github.com/natalie-o-perret/go-sql/query"
 	"github.com/natalie-o-perret/go-sql/scan"
 	_ "modernc.org/sqlite"
@@ -87,11 +86,10 @@ func TestQuery_LazySeq(t *testing.T) {
 	if res.IsErr() {
 		t.Fatalf("unexpected error: %v", res.UnwrapErr())
 	}
-	// seq.Map is package-level because Go cannot infer a new type param on a method
-	labels := seq.Map(
-		res.Unwrap().Filter(func(p product) bool { return p.Price > 1.0 }),
-		func(p product) string { return p.Label },
-	).ToSlice()
+	labels := res.Unwrap().
+		Filter(func(p product) bool { return p.Price > 1.0 }).
+		Map(func(p product) string { return p.Label }).
+		ToSlice()
 	if len(labels) != 1 || labels[0] != "Cherry" {
 		t.Fatalf("unexpected labels: %v", labels)
 	}

@@ -7,7 +7,7 @@ git clone https://github.com/natalie-o-perret/go-sql.git
 cd go-sql
 ```
 
-Requires Go 1.24+ and [golangci-lint](https://golangci-lint.run/welcome/install/).
+Requires Go 1.27+ and [golangci-lint](https://golangci-lint.run/welcome/install/).
 
 ## Workflow
 
